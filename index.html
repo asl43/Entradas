@@ -2,206 +2,226 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Entradas Recorrentes</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--tx:#1b2430;--mut:#6b7785;--bd:#dde3ea;--ac:#0f9d58;--acx:#fff;--dg:#d93025;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151b;--card:#1a222b;--tx:#e8edf2;--mut:#93a0ad;--bd:#2b3743;--ac:#34c77b;--acx:#06160d;--dg:#ff6b60;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#10151b;--card:#1a222b;--tx:#e8edf2;--mut:#93a0ad;--bd:#2b3743;--ac:#34c77b;--acx:#06160d;--dg:#ff6b60;color-scheme:dark}
+:root{--bg:#f4f6f8;--cd:#fff;--tx:#1b2430;--mu:#6b7785;--bd:#dde3ea;--ac:#0f9d58;--ax:#fff;--dg:#d93025}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10151b;--cd:#1a222b;--tx:#e8edf2;--mu:#93a0ad;--bd:#2b3743;--ac:#34c77b;--ax:#06160d;--dg:#ff6b60;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#10151b;--cd:#1a222b;--tx:#e8edf2;--mu:#93a0ad;--bd:#2b3743;--ac:#34c77b;--ax:#06160d;--dg:#ff6b60;color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:720px;margin:0 auto;padding:16px}
-h1{font-size:1.4rem;margin:4px 0 14px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+header{position:sticky;top:0;z-index:5;background:var(--cd);border-bottom:1px solid var(--bd);padding:8px 10px}
+.top{display:flex;justify-content:space-between;align-items:center;max-width:760px;margin:0 auto 6px}
+.top h1{font-size:1.05rem;margin:0}
+nav{display:flex;gap:6px;overflow-x:auto;max-width:760px;margin:0 auto}
+nav button{flex:none;background:transparent;border:1px solid var(--bd);border-radius:20px;padding:6px 12px;font-size:.85rem}
+nav button.on{background:var(--ac);color:var(--ax);border-color:var(--ac);font-weight:600}
+main{max-width:760px;margin:0 auto;padding:14px}
 h2{font-size:1rem;margin:0 0 10px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px}
-label{display:block;font-size:.8rem;color:var(--mut);margin:8px 0 3px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px}
+label{display:block;font-size:.8rem;color:var(--mu);margin:8px 0 3px}
 input,select,button{font:inherit;color:var(--tx)}
 input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg)}
+button{cursor:pointer;background:transparent;border:0;border-radius:10px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px}
-.btn{background:var(--ac);color:var(--acx);font-weight:600;width:100%;margin-top:12px}
-.ghost{background:transparent;border:1px solid var(--bd);padding:6px 10px;font-size:.8rem}
-.big{text-align:center;padding:10px 0 4px}
-.big small{color:var(--mut);display:block}
+.btn{background:var(--ac);color:var(--ax);font-weight:600;width:100%;margin-top:12px;padding:11px}
+.gh{border:1px solid var(--bd);padding:5px 9px;font-size:.78rem}
+.dg{color:var(--dg)}
+.big{text-align:center;padding:6px 0}
+.big small{color:var(--mu);display:block}
 .big strong{font-size:2rem;color:var(--ac)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
 .cell{border:1px solid var(--bd);border-radius:10px;padding:8px 10px;background:var(--bg);text-align:left}
 .cell.on{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
-.cell small{display:block;color:var(--mut);font-size:.75rem}
-.cell b{font-size:.95rem}
-.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--bd)}
-.item:first-child{border-top:0}
-.item .d{font-weight:600}
-.item .m{color:var(--mut);font-size:.8rem}
-.item .v{text-align:right;white-space:nowrap}
-.acts{display:flex;gap:6px;margin-top:4px;justify-content:flex-end}
-.del{color:var(--dg)}
-.empty{color:var(--mut);text-align:center;padding:12px}
+.cell small{display:block;color:var(--mu);font-size:.75rem}
+.it{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--bd)}
+.it:first-child{border-top:0}
+.d{font-weight:600}.m{color:var(--mu);font-size:.8rem}
+.ac{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.empty{color:var(--mu);text-align:center;padding:12px}
 .tw{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:.8rem}
 th,td{padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right;white-space:nowrap}
-th{color:var(--mut);font-weight:600}
-th:first-child,td:first-child{text-align:left}
+th{color:var(--mu)}th:first-child,td:first-child{text-align:left}
 tfoot td{font-weight:700;color:var(--ac)}
+.tab[hidden]{display:none}
+#stt{margin-top:10px;color:var(--mu);font-size:.85rem}
 </style>
 </head>
 <body>
+<header>
+  <div class="top"><h1>💰 Entradas Recorrentes</h1><button class="gh" id="th"></button></div>
+  <nav>
+    <button data-t="resumo">Resumo</button><button data-t="entradas">Entradas</button>
+    <button data-t="rec">Recebimentos</button><button data-t="proj">Projeção</button><button data-t="sync">☁ Planilha</button>
+  </nav>
+</header>
 <main>
-<h1>💰 Entradas recorrentes</h1>
 
-<section class="card">
-  <div class="big">
-    <small id="lblTot">Total mensal</small>
-    <strong id="tot">R$ 0,00</strong>
+<section class="tab" id="t-resumo">
+  <div class="card">
+    <div class="big"><small id="lt"></small><strong id="tot"></strong></div>
+    <div class="grid" id="grid"></div>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="card"><h2>Recebido de fato</h2><div class="grid" id="rgrid"></div></div>
+  <div class="card"><h2>Soma por período (previsto)</h2><div class="tw" id="tbl"></div></div>
 </section>
 
-<section class="card">
-  <h2 id="formTitle">Nova entrada</h2>
-  <label for="desc">Descrição</label>
-  <input id="desc" placeholder="Ex.: Salário, aluguel recebido…" maxlength="60">
-  <div class="row">
-    <div><label for="val">Valor (R$)</label><input id="val" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0,00"></div>
-    <div><label for="freq">Frequência</label><select id="freq"></select></div>
+<section class="tab" id="t-entradas" hidden>
+  <div class="card">
+    <h2 id="ft">Nova entrada</h2>
+    <label for="d">Descrição</label><input id="d" maxlength="60" placeholder="Ex.: Salário, aluguel…">
+    <div class="row">
+      <div><label for="v">Valor (R$)</label><input id="v" type="number" inputmode="decimal" step="0.01" min="0"></div>
+      <div><label for="f">Frequência</label><select id="f"></select></div>
+    </div>
+    <label for="i">Data e hora de início</label><input id="i" type="datetime-local">
+    <button class="btn" id="se">Adicionar</button>
+    <button class="gh" id="ce" hidden style="width:100%;margin-top:8px">Cancelar edição</button>
   </div>
-  <button class="btn" id="save">Adicionar</button>
-  <button class="ghost" id="cancel" style="display:none;margin-top:8px;width:100%">Cancelar edição</button>
+  <div class="card"><h2>Minhas entradas</h2><div id="le"></div></div>
 </section>
 
-<section class="card">
-  <h2>Minhas entradas</h2>
-  <div id="list"></div>
-</section>
-
-<section class="card">
-  <h2>Soma por período</h2>
-  <div class="tw" id="tbl"></div>
-</section>
-
-<section class="card">
-  <h2>Simulação e projeção</h2>
-  <div class="row">
-    <div><label for="pPer">Projetar por</label><select id="pPer"></select></div>
-    <div><label for="pN">Quantidade de períodos</label><input id="pN" type="number" inputmode="numeric" min="1" max="366" value="12"></div>
+<section class="tab" id="t-rec" hidden>
+  <div class="card">
+    <h2>Registrar recebimento</h2>
+    <label for="rE">Entrada</label><select id="rE"></select>
+    <div class="row">
+      <div><label for="rV">Valor (R$)</label><input id="rV" type="number" inputmode="decimal" step="0.01" min="0"></div>
+      <div><label for="rD">Data e hora</label><input id="rD" type="datetime-local"></div>
+    </div>
+    <button class="btn" id="sr">Registrar</button>
   </div>
-  <label for="pG">Reajuste anual das entradas (%)</label>
-  <input id="pG" type="number" inputmode="decimal" step="0.1" value="0">
-  <div class="big" style="margin-top:8px"><small id="pLbl">Acumulado projetado</small><strong id="pTot">R$ 0,00</strong><small id="pSub"></small></div>
-  <div class="tw" id="pTbl"></div>
+  <div class="card"><h2>Histórico</h2><div id="lr"></div></div>
 </section>
+
+<section class="tab" id="t-proj" hidden>
+  <div class="card">
+    <h2>Simulação e projeção</h2>
+    <div class="row">
+      <div><label for="pPer">Projetar por</label><select id="pPer"></select></div>
+      <div><label for="pN">Quantidade de períodos</label><input id="pN" type="number" min="1" max="366" value="12"></div>
+    </div>
+    <label for="pG">Reajuste anual das entradas (%)</label><input id="pG" type="number" step="0.1" value="0">
+    <div class="big"><small id="pLbl"></small><strong id="pTot"></strong><small id="pSub"></small></div>
+    <div class="tw" id="pTbl"></div>
+  </div>
+</section>
+
+<section class="tab" id="t-sync" hidden>
+  <div class="card">
+    <h2>Integração com Google Sheets</h2>
+    <label for="url">URL do Web App (Apps Script)</label><input id="url" placeholder="https://script.google.com/macros/s/.../exec">
+    <label for="tok">Token de acesso</label><input id="tok" type="password" autocomplete="off">
+    <div class="row"><button class="btn" id="sc">Salvar</button><button class="btn" id="ss">Sincronizar agora</button></div>
+    <div id="stt"></div>
+  </div>
+</section>
+
 </main>
-
 <script>
-var F={
-  diario:{n:'Diário',y:365},semanal:{n:'Semanal',y:52},quinzenal:{n:'Quinzenal',y:24},
-  mensal:{n:'Mensal',y:12},bimestral:{n:'Bimestral',y:6},trimestral:{n:'Trimestral',y:4},
-  semestral:{n:'Semestral',y:2},anual:{n:'Anual',y:1}
-};
-var KEY='entradas_recorrentes_v1',data=[],view='mensal',editId=null;
-var $=function(i){return document.getElementById(i)};
-var brl=function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})};
+const F={diario:{n:'Diário',y:365},semanal:{n:'Semanal',y:52},quinzenal:{n:'Quinzenal',y:24},mensal:{n:'Mensal',y:12},bimestral:{n:'Bimestral',y:6},trimestral:{n:'Trimestral',y:4},semestral:{n:'Semestral',y:2},anual:{n:'Anual',y:1}};
+const K=Object.keys(F),$=i=>document.getElementById(i),KEY='er_v2';
+const brl=n=>(+n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={entradas:[],recebimentos:[],cfg:{url:'',token:''}},vw='mensal',eid=null,tm,th='auto';
+try{const o=JSON.parse(localStorage.getItem(KEY));if(o)S=Object.assign(S,o);th=localStorage.getItem('er_th')||'auto'}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const live=a=>a.filter(x=>!x.excluido);
+const now=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
+const dt=s=>new Date(s).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const ann=e=>e.valor*F[e.freq].y;
+const tot=p=>live(S.entradas).reduce((s,e)=>s+ann(e),0)/F[p].y;
 
-function load(){
-  try{var r=localStorage.getItem(KEY);if(r){var o=JSON.parse(r);data=o.data||[];view=o.view||'mensal'}}catch(e){}
-}
-function save(){
-  try{localStorage.setItem(KEY,JSON.stringify({data:data,view:view}))}catch(e){}
-}
-function annual(e){return e.valor*F[e.freq].y}
-function totalIn(p){
-  var a=data.reduce(function(s,e){return s+annual(e)},0);
-  return a/F[p].y;
-}
-function render(){
-  $('lblTot').textContent='Total '+F[view].n.toLowerCase();
-  $('tot').textContent=brl(totalIn(view));
-  var g='';
-  Object.keys(F).forEach(function(k){
-    g+='<button class="cell'+(k===view?' on':'')+'" data-k="'+k+'"><small>'+F[k].n+'</small><b>'+brl(totalIn(k))+'</b></button>';
-  });
-  $('grid').innerHTML=g;
-  var l='';
-  data.forEach(function(e){
-    l+='<div class="item"><div><div class="d">'+esc(e.desc)+'</div><div class="m">'+brl(e.valor)+' · '+F[e.freq].n+'</div></div>'+
-    '<div class="v"><b>'+brl(annual(e)/F[view].y)+'</b><div class="m">por período '+F[view].n.toLowerCase()+'</div>'+
-    '<div class="acts"><button class="ghost" data-ed="'+e.id+'">Editar</button><button class="ghost del" data-del="'+e.id+'">Excluir</button></div></div></div>';
-  });
-  $('list').innerHTML=l||'<div class="empty">Nenhuma entrada ainda.</div>';
-  var ks=Object.keys(F),t='';
-  if(data.length){
-    t='<table><thead><tr><th>Entrada</th>'+ks.map(function(k){return '<th>'+F[k].n+'</th>'}).join('')+'</tr></thead><tbody>';
-    data.forEach(function(e){
-      t+='<tr><td>'+esc(e.desc)+'</td>'+ks.map(function(k){return '<td>'+brl(annual(e)/F[k].y)+'</td>'}).join('')+'</tr>';
-    });
-    t+='</tbody><tfoot><tr><td>Total</td>'+ks.map(function(k){return '<td>'+brl(totalIn(k))+'</td>'}).join('')+'</tr></tfoot></table>';
-  }else{t='<div class="empty">Nenhuma entrada ainda.</div>'}
-  $('tbl').innerHTML=t;
-  renderProj();
-}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+/* tema */
+function applyTh(){const r=document.documentElement;th==='auto'?r.removeAttribute('data-theme'):r.setAttribute('data-theme',th);$('th').textContent={auto:'🌗 Auto',light:'☀️ Claro',dark:'🌙 Escuro'}[th]}
+$('th').onclick=()=>{th={auto:'light',light:'dark',dark:'auto'}[th];try{localStorage.setItem('er_th',th)}catch(e){}applyTh()};
 
-function resetForm(){
-  editId=null;$('desc').value='';$('val').value='';$('freq').value='mensal';
-  $('save').textContent='Adicionar';$('formTitle').textContent='Nova entrada';$('cancel').style.display='none';
-}
-$('freq').innerHTML=Object.keys(F).map(function(k){return '<option value="'+k+'">'+F[k].n+'</option>'}).join('');
-$('freq').value='mensal';
+/* menu */
+function go(t){document.querySelectorAll('.tab').forEach(x=>x.hidden=x.id!=='t-'+t);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));window.scrollTo(0,0)}
+document.querySelector('nav').onclick=e=>{const b=e.target.closest('[data-t]');if(b)go(b.dataset.t)};
 
-$('save').onclick=function(){
-  var d=$('desc').value.trim(),v=parseFloat($('val').value),f=$('freq').value;
-  if(!d){$('desc').focus();return}
-  if(!(v>0)){$('val').focus();return}
-  if(editId){
-    data.forEach(function(e){if(e.id===editId){e.desc=d;e.valor=v;e.freq=f}});
-  }else{
-    data.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),desc:d,valor:v,freq:f});
-  }
-  save();resetForm();render();
-};
-$('cancel').onclick=resetForm;
-$('grid').onclick=function(ev){
-  var b=ev.target.closest('[data-k]');if(!b)return;
-  view=b.getAttribute('data-k');save();render();
-};
-$('list').onclick=function(ev){
-  var d=ev.target.closest('[data-del]'),e=ev.target.closest('[data-ed]');
-  if(d){
-    if(confirm('Excluir esta entrada?')){
-      var id=d.getAttribute('data-del');
-      data=data.filter(function(x){return x.id!==id});save();render();
-    }
-  }else if(e){
-    var id2=e.getAttribute('data-ed'),it=data.filter(function(x){return x.id===id2})[0];
-    if(!it)return;
-    editId=id2;$('desc').value=it.desc;$('val').value=it.valor;$('freq').value=it.freq;
-    $('save').textContent='Salvar alteração';$('formTitle').textContent='Editar entrada';$('cancel').style.display='block';
-    $('desc').scrollIntoView({behavior:'smooth',block:'center'});
-  }
-};
-function renderProj(){
-  var k=$('pPer').value,n=Math.min(Math.max(parseInt($('pN').value,10)||1,1),366);
-  var g=(parseFloat($('pG').value)||0)/100,base=totalIn(k),y=F[k].y,acc=0,rows='',hoje=Date.now();
-  if(!data.length){$('pTot').textContent=brl(0);$('pSub').textContent='';$('pTbl').innerHTML='<div class="empty">Adicione entradas para ver a projeção.</div>';return}
-  for(var i=0;i<n;i++){
-    var v=base*Math.pow(1+g,Math.floor(i*365/y/365));acc+=v;
-    if(i<60){
-      var d=new Date(hoje+(i+1)*365/y*864e5).toLocaleDateString('pt-BR');
-      rows+='<tr><td>'+(i+1)+'</td><td>'+d+'</td><td>'+brl(v)+'</td><td>'+brl(acc)+'</td></tr>';
-    }
-  }
-  var anos=n/y,fim=new Date(hoje+n*365/y*864e5).toLocaleDateString('pt-BR');
-  $('pLbl').textContent='Acumulado em '+n+' período(s) '+F[k].n.toLowerCase()+'(is)';
-  $('pTot').textContent=brl(acc);
-  $('pSub').textContent='Média de '+brl(acc/n)+' por período · até '+fim+' (≈ '+anos.toLocaleString('pt-BR',{maximumFractionDigits:2})+' ano(s))';
-  $('pTbl').innerHTML='<table><thead><tr><th>Nº</th><th>Até</th><th>Entrada</th><th>Acumulado</th></tr></thead><tbody>'+rows+'</tbody></table>'+(n>60?'<div class="empty">Mostrando os 60 primeiros períodos; o total acima considera todos.</div>':'');
+/* renders */
+function rRes(){
+  $('lt').textContent='Total previsto '+F[vw].n.toLowerCase();$('tot').textContent=brl(tot(vw));
+  $('grid').innerHTML=K.map(k=>`<button class="cell${k===vw?' on':''}" data-k="${k}"><small>${F[k].n}</small><b>${brl(tot(k))}</b></button>`).join('');
+  const W=[['24 h',1],['7 dias',7],['15 dias',15],['30 dias',30],['60 dias',60],['90 dias',90],['180 dias',180],['365 dias',365]],n=Date.now(),R=live(S.recebimentos);
+  $('rgrid').innerHTML=W.map(([l,d])=>`<div class="cell"><small>Últimos ${l}</small><b>${brl(R.filter(r=>{const t=new Date(r.dataHora).getTime();return t<=n&&t>n-d*864e5}).reduce((s,r)=>s+r.valor,0))}</b></div>`).join('');
+  const E=live(S.entradas);
+  $('tbl').innerHTML=E.length?`<table><thead><tr><th>Entrada</th>${K.map(k=>`<th>${F[k].n}</th>`).join('')}</tr></thead><tbody>${E.map(e=>`<tr><td>${esc(e.descricao)}</td>${K.map(k=>`<td>${brl(ann(e)/F[k].y)}</td>`).join('')}</tr>`).join('')}</tbody><tfoot><tr><td>Total</td>${K.map(k=>`<td>${brl(tot(k))}</td>`).join('')}</tr></tfoot></table>`:'<div class="empty">Nenhuma entrada.</div>';
 }
-$('pPer').innerHTML=Object.keys(F).map(function(k){return '<option value="'+k+'">'+F[k].n+'</option>'}).join('');
+function rEnt(){
+  const E=live(S.entradas);
+  $('le').innerHTML=E.map(e=>`<div class="it"><div><div class="d">${esc(e.descricao)}</div><div class="m">${brl(e.valor)} · ${F[e.freq].n} · desde ${dt(e.inicio)}</div></div><div class="ac"><button class="gh" data-a="rec" data-id="${e.id}">Receber</button><button class="gh" data-a="ed" data-id="${e.id}">Editar</button><button class="gh dg" data-a="de" data-id="${e.id}">Excluir</button></div></div>`).join('')||'<div class="empty">Nenhuma entrada ainda.</div>';
+  const v=$('rE').value;$('rE').innerHTML='<option value="">Avulso</option>'+E.map(e=>`<option value="${e.id}">${esc(e.descricao)}</option>`).join('');$('rE').value=E.some(e=>e.id===v)?v:'';
+}
+function rRec(){
+  $('lr').innerHTML=live(S.recebimentos).sort((a,b)=>new Date(b.dataHora)-new Date(a.dataHora)).map(r=>`<div class="it"><div><div class="d">${esc(r.descricao)}</div><div class="m">${dt(r.dataHora)}</div></div><div class="ac"><b>${brl(r.valor)}</b><button class="gh dg" data-a="dr" data-id="${r.id}">Excluir</button></div></div>`).join('')||'<div class="empty">Nenhum recebimento registrado.</div>';
+}
+function rProj(){
+  const k=$('pPer').value,n=Math.min(Math.max(parseInt($('pN').value,10)||1,1),366),g=(parseFloat($('pG').value)||0)/100,base=tot(k),y=F[k].y,h=Date.now();let acc=0,rows='';
+  if(!live(S.entradas).length){$('pLbl').textContent='';$('pTot').textContent=brl(0);$('pSub').textContent='';$('pTbl').innerHTML='<div class="empty">Adicione entradas para ver a projeção.</div>';return}
+  for(let i=0;i<n;i++){const v=base*Math.pow(1+g,Math.floor(i*365/y/365));acc+=v;
+    if(i<60)rows+=`<tr><td>${i+1}</td><td>${new Date(h+(i+1)*365/y*864e5).toLocaleDateString('pt-BR')}</td><td>${brl(v)}</td><td>${brl(acc)}</td></tr>`}
+  $('pLbl').textContent=`Acumulado em ${n} período(s) ${F[k].n.toLowerCase()}(is)`;$('pTot').textContent=brl(acc);
+  $('pSub').textContent=`Média de ${brl(acc/n)} por período · até ${new Date(h+n*365/y*864e5).toLocaleDateString('pt-BR')}`;
+  $('pTbl').innerHTML=`<table><thead><tr><th>Nº</th><th>Até</th><th>Entrada</th><th>Acumulado</th></tr></thead><tbody>${rows}</tbody></table>`+(n>60?'<div class="empty">Mostrando os 60 primeiros; o total considera todos.</div>':'');
+}
+const render=()=>{rRes();rEnt();rRec();rProj()};
+const chg=()=>{sv();render();clearTimeout(tm);tm=setTimeout(()=>sync(false),1200)};
+
+/* entradas */
+const clr=()=>{eid=null;$('d').value='';$('v').value='';$('f').value='mensal';$('i').value=now();$('se').textContent='Adicionar';$('ce').hidden=true;$('ft').textContent='Nova entrada'};
+$('se').onclick=()=>{
+  const d=$('d').value.trim(),v=parseFloat($('v').value);if(!d)return $('d').focus();if(!(v>0))return $('v').focus();
+  const o={descricao:d,valor:v,freq:$('f').value,inicio:$('i').value||now(),atualizadoEm:Date.now()};
+  if(eid)Object.assign(S.entradas.find(e=>e.id===eid),o);else S.entradas.push({id:uid(),excluido:0,...o});
+  clr();chg();
+};
+$('ce').onclick=clr;
+/* recebimentos */
+const fillR=()=>{const e=S.entradas.find(x=>x.id===$('rE').value);if(e)$('rV').value=e.valor};
+$('rE').onchange=fillR;
+$('sr').onclick=()=>{
+  const v=parseFloat($('rV').value);if(!(v>0))return $('rV').focus();
+  const e=S.entradas.find(x=>x.id===$('rE').value);
+  S.recebimentos.push({id:uid(),entradaId:e?e.id:'',descricao:e?e.descricao:'Avulso',valor:v,dataHora:$('rD').value||now(),atualizadoEm:Date.now(),excluido:0});
+  $('rV').value='';$('rD').value=now();chg();
+};
+/* ações da lista */
+document.addEventListener('click',ev=>{
+  const g=ev.target.closest('[data-k]');if(g){vw=g.dataset.k;return rRes()}
+  const b=ev.target.closest('[data-a]');if(!b)return;
+  const id=b.dataset.id,a=b.dataset.a,E=S.entradas.find(e=>e.id===id),R=S.recebimentos.find(r=>r.id===id);
+  if(a==='de'&&confirm('Excluir esta entrada?')){E.excluido=1;E.atualizadoEm=Date.now();chg()}
+  else if(a==='dr'&&confirm('Excluir este recebimento?')){R.excluido=1;R.atualizadoEm=Date.now();chg()}
+  else if(a==='ed'){eid=id;$('d').value=E.descricao;$('v').value=E.valor;$('f').value=E.freq;$('i').value=E.inicio;$('se').textContent='Salvar';$('ce').hidden=false;$('ft').textContent='Editar entrada';go('entradas')}
+  else if(a==='rec'){go('rec');$('rE').value=id;fillR();$('rD').value=now()}
+});
+/* projeção */
+$('pPer').innerHTML=$('f').innerHTML=K.map(k=>`<option value="${k}">${F[k].n}</option>`).join('');
 $('pPer').value='mensal';
-['pPer','pN','pG'].forEach(function(i){$(i).oninput=renderProj});
-load();render();
+['pPer','pN','pG'].forEach(i=>$(i).oninput=rProj);
+
+/* sincronização bidirecional */
+const st=m=>$('stt').textContent=m;
+const mg=(a,b)=>{const m=new Map(a.map(x=>[x.id,x]));(b||[]).forEach(x=>{const o=m.get(x.id);if(!o||x.atualizadoEm>o.atualizadoEm)m.set(x.id,x)});return[...m.values()]};
+async function sync(manual){
+  const c=S.cfg;if(!c.url||!c.token){if(manual)st('Informe a URL e o token e salve.');return}
+  st('Sincronizando…');
+  try{
+    const r=await fetch(c.url,{method:'POST',body:JSON.stringify({token:c.token,entradas:S.entradas,recebimentos:S.recebimentos})});
+    const j=await r.json();if(!j.ok)throw new Error(j.erro||'falha');
+    S.entradas=mg(S.entradas,j.entradas);S.recebimentos=mg(S.recebimentos,j.recebimentos);sv();render();
+    st('Sincronizado às '+new Date().toLocaleTimeString('pt-BR'));
+  }catch(e){st('Erro: '+e.message)}
+}
+$('url').value=S.cfg.url||'';$('tok').value=S.cfg.token||'';
+$('sc').onclick=()=>{S.cfg.url=$('url').value.trim();S.cfg.token=$('tok').value.trim();sv();st('Configuração salva.')};
+$('ss').onclick=()=>{S.cfg.url=$('url').value.trim();S.cfg.token=$('tok').value.trim();sv();sync(true)};
+
+applyTh();clr();$('rD').value=now();render();go('resumo');sync(false);
 </script>
 </body>
 </html>
