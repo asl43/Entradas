@@ -195,6 +195,11 @@ const tot=p=>live(S.entradas).reduce((s,e)=>s+ann(e),0)/F[p].y;
 const simTot=p=>(live(S.entradas).filter(e=>!sim.off.has(e.id)).reduce((s,e)=>s+ann(e),0)+sim.add.reduce((s,a)=>s+a.valor*F[a.freq].y,0))/F[p].y;
 const got=(k,id)=>{const n=Date.now(),d=Math.round(365/F[k].y)*864e5;return live(S.recebimentos).filter(r=>{const t=+new Date(r.dataHora);return t<=n&&t>n-d&&(!id||r.entradaId===id)}).reduce((s,r)=>s+r.valor,0)};
 const gotCal=u=>{const d=new Date(),a=u==='m'?new Date(d.getFullYear(),d.getMonth(),1):new Date(d.getFullYear(),0,1);return live(S.recebimentos).filter(r=>{const t=new Date(r.dataHora);return t>=a&&t<=d}).reduce((s,r)=>s+r.valor,0)};
+const fk=s=>{s=String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();return F[s]?s:(K.find(k=>s.slice(0,4)===k.slice(0,4))||'mensal')};
+const fix=()=>{
+  S.entradas=(S.entradas||[]).filter(e=>e&&e.id&&(e.descricao||Number(e.valor))).map(e=>({...e,freq:fk(e.freq),valor:Number(e.valor)||0,descricao:e.descricao||'(sem descrição)',inicio:e.inicio||now(),excluido:e.excluido?1:0,atualizadoEm:Number(e.atualizadoEm)||0}));
+  S.recebimentos=(S.recebimentos||[]).filter(r=>r&&r.id&&Number(r.valor)).map(r=>({...r,valor:Number(r.valor)||0,dataHora:r.dataHora||now(),excluido:r.excluido?1:0,atualizadoEm:Number(r.atualizadoEm)||0}));
+};
 const catE=e=>e.categoria||'Sem categoria';
 const catR=r=>{const e=S.entradas.find(x=>x.id===r.entradaId);return e?catE(e):'Avulso'};
 
@@ -306,7 +311,7 @@ async function sync(manual){
   try{
     const r=await fetch(c.url,{method:'POST',body:JSON.stringify({token:c.token,entradas:S.entradas,recebimentos:S.recebimentos})});
     const j=await r.json();if(!j.ok)throw new Error(j.erro||'falha');
-    S.entradas=mg(S.entradas,j.entradas);S.recebimentos=mg(S.recebimentos,j.recebimentos);sv();render();
+    S.entradas=mg(S.entradas,j.entradas);S.recebimentos=mg(S.recebimentos,j.recebimentos);fix();sv();render();
     st('Sincronizado às '+new Date().toLocaleTimeString('pt-BR'));
   }catch(e){st('Erro: '+e.message)}
 }
@@ -315,7 +320,7 @@ const cfg=()=>{S.cfg.url=$('url').value.trim();S.cfg.token=$('tok').value.trim()
 $('sc').onclick=()=>{cfg();st('Configuração salva.')};
 $('ss').onclick=()=>{cfg();sync(true)};
 
-applyTh();net();clr();$('rD').value=now();render();go('resumo');sync(false);
+fix();sv();applyTh();net();clr();$('rD').value=now();render();go('resumo');sync(false);
 </script>
 </body>
 </html>
